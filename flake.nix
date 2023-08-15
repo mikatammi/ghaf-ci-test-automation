@@ -22,10 +22,7 @@
       packages.robot-tests = pkgs.callPackage ./Robot-Framework {
         pythonPackages = pkgs.python3Packages;
       };
-      packages.install-requires = pkgs.python3Packages.callPackage ./pkgs/install-requires {};
       packages.robotframework-seriallibrary = pkgs.python3Packages.callPackage ./pkgs/robotframework-seriallibrary {
-        # pythonPackages = pkgs.python3Packages;
-	install-requires = self.packages.${system}.install-requires;
       };
       packages.default = self.packages.${system}.robot-tests;
 
@@ -35,6 +32,7 @@
           (python3.withPackages (ps:
             with ps; [
               robotframework
+              self.packages.${system}.robotframework-seriallibrary
               robotframework-sshlibrary
             ]))
         ];
