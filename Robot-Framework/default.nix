@@ -11,8 +11,8 @@ stdenv.mkDerivation {
     pythonPackages.robotframework-sshlibrary
   ];
   installPhase = ''
-    mkdir -p $out
-    cp -rv config lib resources test-suites $out
+    # mkdir -p $out
+    # cp -rv config lib resources test-suites $out
 
     # WORK IN PROGRESS
   '';
