@@ -1,19 +1,27 @@
 {
-  pythonPackages,
+  PyP100,
+  python3,
+  robotframework-advancedlogging,
+  robotframework-seriallibrary,
   stdenv,
+  writeShellApplication,
 }:
-stdenv.mkDerivation {
-  pname = "robot-tests";
-  version = "0.0.1";
-  src = ./.;
-  buildInputs = [
-    pythonPackages.robotframework
-    pythonPackages.robotframework-sshlibrary
-  ];
-  installPhase = ''
-    # mkdir -p $out
-    # cp -rv config lib resources test-suites $out
+writeShellApplication {
+  name = "ghaf-robot";
+  runtimeInputs = [
+    (python3.withPackages (ps: [
+      # These are taken from nixpkgs
+      ps.robotframework
+      ps.robotframework-sshlibrary
+      ps.pyserial
 
-    # WORK IN PROGRESS
+      # These are taken from this flake
+      robotframework-advancedlogging
+      robotframework-seriallibrary
+      PyP100
+    ]))
+  ];
+  text = ''
+    robot "$@"
   '';
 }
