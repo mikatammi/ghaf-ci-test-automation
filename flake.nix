@@ -40,6 +40,7 @@
               self.packages.${system}.robotframework-advancedlogging
               self.packages.${system}.PyP100
               robotframework-sshlibrary
+              pyserial
             ]))
         ];
       };
